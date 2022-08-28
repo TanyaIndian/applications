@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #dusra{
+            width:60%;
+            border: 1px solid green;
+        }
+        #dusra iframe{
+        margin-top: 5%;
+           height:500px;
+           width:100%
+        }
+        #main{
+            display:flex;
+            justify-content: space-between;
+
+        }
+        #cont img{
+            width:50%;
+          
+        }
+        
+     
+     
+    </style>
+</head>
+<body>
+    <div id="main">
+    <div id="dusra"></div>
+    <div id="cont">ncdsjnckj</div>
+</div>
+    
+</body>
+</html>
+
+<script>
+    var bhej= JSON.parse(localStorage.getItem("secpage"))
+
+var div=document.createElement("div")
+
+let i=document.createElement("iframe")
+
+ i.src=`https://www.youtube.com/embed/${bhej}`
+  i.setAttribute("allowfullscreen",true)
+
+  document.querySelector("#dusra").append(i)
+
+
+
+
+//   let key="AIzaSyBIM8Us93kR32oJ1qXpNuSyAffRlHQyxSs"
+  let key="AIzaSyAYWe4pzd5-SYLMBr9Yd4PwgXrhL6u6blQ"
+
+
+
+let trend= async()=>{
+
+
+
+     try{
+
+        // let key="AIzaSyAYWe4pzd5-SYLMBr9Yd4PwgXrhL6u6blQ"
+let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?key=${key}&q=latest&type=video&maxResults=20&part=snippet`)
+let data= await res.json()
+let r= data.items
+//   console.log(data)
+console.log(r)
+display1(r)
+}
+
+catch(err){
+console.log("err",err)
+}
+
+}
+
+
+let display1=(d)=>{
+console.log(d)
+document.querySelector("#cont").innerHTML=""
+
+d.forEach((el)=>{
+
+const { id:{videoId},snippet:{title,thumbnails:{high}}}= el;
+console.log(videoId)
+
+console.log(high)
+let div=document.createElement("div")
+
+//   let i=document.createElement("iframe")
+//      i.src=`https://www.youtube.com/embed/${videoId}`
+//       i.setAttribute("allowfullscreen",true)
+
+let tit=document.createElement("h5")
+tit.textContent=title
+var image=document.createElement("img")
+image.src=high.url
+
+
+
+div.append(image,tit)
+document.querySelector("#cont").append(div)
+
+
+
+})
+}
+trend()
+
+
+
+// display=(d)=>{
+// console.log(d)
+// document.querySelector("#cont").innerHTML=""
+
+// d.forEach((el)=>{
+
+// const { id:{videoId},snippet:{title,thumbnails:{high}}}= el;
+// console.log(videoId)
+
+// console.log(high)
+// let div=document.createElement("div")
+
+// //   let i=document.createElement("iframe")
+// //      i.src=`https://www.youtube.com/embed/${videoId}`
+// //       i.setAttribute("allowfullscreen",true)
+
+// let tit=document.createElement("h5")
+// tit.textContent=title
+// var image=document.createElement("img")
+// image.src=high.url
+
+// div.append(image,tit)
+// document.querySelector("#cont").append(div)
+
+// })
+// }
+
+
+
+
+
+
+
+
+
+
+
+</script>
